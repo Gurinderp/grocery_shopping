@@ -71,7 +71,7 @@ void signIn(std::string& customerName) {
 
     std::cout << "Please choose one of the following options:" 
         << std::endl
-        << "Sign In (1), Register (2), Guest (ANY)" 
+        << "Sign In (1), Register (2), Guest (3)" 
         << std::endl;
     std::cin >> sign_in_selection;
 
@@ -82,7 +82,9 @@ void signIn(std::string& customerName) {
     case 2:
         customerRegister(customerName);
         break;
-    };
+    case 3:
+        greetCustomer(customerName);
+    }
 }
 
 void customerLogin(std::string& customerName) 
@@ -94,7 +96,9 @@ void customerLogin(std::string& customerName)
 
 void customerRegister(std::string& customerName) 
 {
-    std::cout << "Register" << std::endl;
+    std::cout << "Please enter username:"
+        << std::endl;
+    std::cin >> customerName;
 };
 
 void greetCustomer(std::string customerName) 
@@ -141,45 +145,26 @@ void customerCart(int& applesTaken,
     int& jolly_rancherTaken, int& chickenTaken, int& steakTaken,
     int& pork_chopTaken)
 {
-    std::cout << "Enter your desired amount:"
-        << std::endl
+    std::cout << "Enter your desired amount:" << std::endl
         << "Apples: ";
     std::cin >> applesTaken;
-    std::cout
-        << std::endl
-        << "Bananas: ";
+    std::cout << "Bananas: ";
     std::cin >> bananasTaken;
-    std::cout
-        << std::endl
-        << "Oranges: ";
+    std::cout << "Oranges: ";
     std::cin >> orangesTaken;
-    std::cout
-        << std::endl
-        << "Hershey: ";
+    std::cout << "Hershey: ";
     std::cin >> hersheyTaken;
-    std::cout
-        << std::endl
-        << "Twix: ";
+    std::cout << "Twix: ";
     std::cin >> twixTaken;
-    std::cout
-        << std::endl
-        << "Taffy: ";
+    std::cout << "Taffy: ";
     std::cin >> taffyTaken;
-    std::cout
-        << std::endl
-        << "Jolly Ranchers: ";
+    std::cout << "Jolly Ranchers: ";
     std::cin >> jolly_rancherTaken;
-    std::cout
-        << std::endl
-        << "Chicken: ";
+    std::cout << "Chicken: ";
     std::cin >> chickenTaken;
-    std::cout
-        << std::endl
-        << "Steak: ";
+    std::cout << "Steak: ";
     std::cin >> steakTaken;
-    std::cout
-        << std::endl
-        << "Pork Chops: ";
+    std::cout << "Pork Chops: ";
     std::cin >> pork_chopTaken;
 };
 
@@ -191,7 +176,28 @@ void processGrocery(int apples, int bananas, int oranges,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken)
 {
-    std::cout << "Should take the inventory and remove what the customer took." 
+    system("cls");
+    std::cout << "Your cart:"
+        << std::endl
+        << "Apples: " << applesTaken
+        << std::endl
+        << "Bananas: " << bananasTaken
+        << std::endl
+        << "Oranges: " << orangesTaken
+        << std::endl
+        << "Hershey: " << hersheyTaken
+        << std::endl
+        << "Twix: " << twixTaken
+        << std::endl
+        << "Taffy: " << taffyTaken
+        << std::endl
+        << "Jolly Ranchers: " << jolly_rancherTaken
+        << std::endl
+        << "Chicken: " << chickenTaken
+        << std::endl
+        << "Steak: " << steakTaken
+        << std::endl
+        << "Pork Chops: " << pork_chopTaken
         << std::endl;
 }
 
