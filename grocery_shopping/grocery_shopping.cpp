@@ -21,7 +21,11 @@ void processGrocery(int apples, int bananas, int oranges,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken);
-void checkoutCustomer();
+void checkoutCustomer(int applesTaken,
+    int bananasTaken, int orangesTaken,
+    int hersheyTaken, int twixTaken, int taffyTaken,
+    int jolly_rancherTaken, int chickenTaken, int steakTaken,
+    int pork_chopTaken);
 void exitStore();
 
 int main()
@@ -62,7 +66,11 @@ int main()
         hersheyTaken, twixTaken, taffyTaken,
         jolly_rancherTaken, chickenTaken, steakTaken,
         pork_chopTaken);
-    checkoutCustomer();
+    checkoutCustomer(applesTaken,
+        bananasTaken, orangesTaken,
+        hersheyTaken, twixTaken, taffyTaken,
+        jolly_rancherTaken, chickenTaken, steakTaken,
+        pork_chopTaken);
     exitStore();
 }
 
@@ -225,7 +233,11 @@ void processGrocery(int apples, int bananas, int oranges,
         << std::endl;
 }
 
-void checkoutCustomer() 
+void checkoutCustomer(int applesTaken,
+    int bananasTaken, int orangesTaken,
+    int hersheyTaken, int twixTaken, int taffyTaken,
+    int jolly_rancherTaken, int chickenTaken, int steakTaken,
+    int pork_chopTaken)
 {
     std::this_thread::sleep_for(std::chrono::seconds(3));
     std::cout << "Need to create balance that is deducted" 
