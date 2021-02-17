@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 
 void signIn(std::string& customerName);
 void customerLogin(std::string& customerName);
@@ -107,6 +108,7 @@ void greetCustomer(std::string customerName)
         << customerName 
         << "!" 
         << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(3));
 };
 
 void displayGrocery(int apples, int bananas, int oranges, 
@@ -137,6 +139,7 @@ void displayGrocery(int apples, int bananas, int oranges,
         << std::endl
         << "Pork Chops: " << pork_chop
         << std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 };
 
 void customerCart(int& applesTaken,
@@ -145,14 +148,22 @@ void customerCart(int& applesTaken,
     int& jolly_rancherTaken, int& chickenTaken, int& steakTaken,
     int& pork_chopTaken)
 {
-    std::cout << "Enter your desired amount:" << std::endl
+    std::cout << '\n' 
+        << "Enter your desired amount:" 
+        << std::endl 
+        << '\n'
+        << "FRUITS" 
+        << std::endl
         << "Apples: ";
     std::cin >> applesTaken;
     std::cout << "Bananas: ";
     std::cin >> bananasTaken;
     std::cout << "Oranges: ";
     std::cin >> orangesTaken;
-    std::cout << "Hershey: ";
+    std::cout << '\n'
+        << "CANDY" 
+        << std::endl 
+        << "Hershey: ";
     std::cin >> hersheyTaken;
     std::cout << "Twix: ";
     std::cin >> twixTaken;
@@ -160,7 +171,10 @@ void customerCart(int& applesTaken,
     std::cin >> taffyTaken;
     std::cout << "Jolly Ranchers: ";
     std::cin >> jolly_rancherTaken;
-    std::cout << "Chicken: ";
+    std::cout << '\n'
+        << "MEAT"
+        << std::endl
+        << "Chicken: ";
     std::cin >> chickenTaken;
     std::cout << "Steak: ";
     std::cin >> steakTaken;
@@ -203,6 +217,7 @@ void processGrocery(int apples, int bananas, int oranges,
 
 void checkoutCustomer() 
 {
+    std::this_thread::sleep_for(std::chrono::seconds(3));
     std::cout << "Need to create balance that is deducted" 
         << std::endl;
 };
