@@ -2,24 +2,39 @@
 #include <thread>
 
 // Beginning of path - Login, Register, and Guest paths offered
-void signIn(std::string& customerName);
+void signIn(std::string& customerName, float& customerBalance);
+
 // Login Path
-void customerLogin(std::string customerName);
+void customerLogin(std::string& customerName, float& customerBalance);
+
 // Register Path
-void customerRegister(std::string customerName);
+void customerRegister(std::string& customerName, float& customerBalance);
+
+// Guest Path
+void initializeGuest(std:: string& customerName, float& customerBalance);
+
 // Greeting displayed after path is chosen
-void greetCustomer(std::string customerName);
+void greetCustomer(std::string customerName, float customerBalance);
+
 // Displays Grocery available for the day
 void displayGrocery(int apples, int bananas, int oranges, 
     int hershey, int twix, int taffy, 
     int jolly_rancher, int chicken, 
-    int steak, int pork_chop);
+    int steak, int pork_chop, float customerBalance);
+
 // Displays customers cart after selections
 void customerCart(int& applesTaken,
     int& bananasTaken, int& orangesTaken,
     int& hersheyTaken, int& twixTaken, int& taffyTaken,
     int& jolly_rancherTaken, int& chickenTaken, int& steakTaken,
-    int& pork_chopTaken);
+    int& pork_chopTaken, std::string confirmationSelection);
+
+void displayCart(int applesTaken,
+    int bananasTaken, int orangesTaken,
+    int hersheyTaken, int twixTaken, int taffyTaken,
+    int jolly_rancherTaken, int chickenTaken, int steakTaken,
+    int pork_chopTaken, std::string confirmationSelection);
+
 // Processes inventory to adjust for customer shopping
 void processGrocery(int apples, int bananas, int oranges,
     int hershey, int twix, int taffy, int jolly_rancher,
@@ -28,19 +43,25 @@ void processGrocery(int apples, int bananas, int oranges,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken);
+
+// Allows customer to discard grocery from cart
+void discardGrocery();
+
 // Deducts grocery cost from customer balance
 void checkoutCustomer(int applesTaken,
     int bananasTaken, int orangesTaken,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken);
+
 // Exits store
 void exitStore();
 
 int main()
 {
-    // Customer Name
+    // Customer Information
     std::string customerName = "Guest";
+    float customerBalance;
 
     // GROCERY STOCK VAIRABLES
     // Fruit variables
@@ -72,13 +93,16 @@ int main()
     int steakTaken;
     int pork_chopTaken;
 
-    signIn(customerName);
-    displayGrocery(apples, bananas, oranges, hershey, twix, taffy, jolly_rancher, chicken, steak, pork_chop);
+    // ETC
+    std::string confirmationSelection;
+
+    signIn(customerName, customerBalance);
+    displayGrocery(apples, bananas, oranges, hershey, twix, taffy, jolly_rancher, chicken, steak, pork_chop, customerBalance);
     customerCart(applesTaken, 
         bananasTaken, orangesTaken,
         hersheyTaken, twixTaken, taffyTaken,
         jolly_rancherTaken, chickenTaken, steakTaken,
-        pork_chopTaken);
+        pork_chopTaken, confirmationSelection);
     processGrocery(apples, bananas, oranges,
         hershey, twix, taffy, jolly_rancher,
         chicken, steak, pork_chop, applesTaken,
@@ -95,7 +119,7 @@ int main()
 }
 
 // Beginning of path - Login, Register, and Guest paths offered
-void signIn(std::string& customerName) {
+void signIn(std::string& customerName, float& customerBalance) {
     int sign_in_selection;
     // Prompt to choosing path
     std::cout << "Please choose one of the following options:" 
@@ -108,58 +132,72 @@ void signIn(std::string& customerName) {
     switch (sign_in_selection) {
     case 1:
         // Begins Login path
-        customerLogin(customerName);
+        customerLogin(customerName, customerBalance);
         break;
     case 2:
         // Begins Register path
-        customerRegister(customerName);
+        customerRegister(customerName, customerBalance);
         break;
     case 3:
         // Begins Guest path
-        greetCustomer(customerName = "Guest");
+        initializeGuest(customerName, customerBalance);
     }
 }
 
 // Login Path -- NEEDS WORK
-void customerLogin(std::string customerName) 
+void customerLogin(std::string& customerName, float& customerBalance)
 {
     std::cout << "Please enter username:"
         << std::endl;
     std::cin >> customerName;
-    greetCustomer(customerName);
 };
 
 // Register Path -- NEEDS WORK
-void customerRegister(std::string customerName) 
+void customerRegister(std::string& customerName, float& customerBalance)
 {
     std::cout << "Please enter username:"
         << std::endl;
     std::cin >> customerName;
-    greetCustomer(customerName);
 };
 
+// Guest Path
+void initializeGuest(std::string& customerName, float& customerBalance) 
+{
+    customerName = "Guest";
+    customerBalance = 200.00;
+    greetCustomer(customerName, customerBalance);
+}
+
 // Greeting displayed after path is chosen
-void greetCustomer(std::string customerName) 
+void greetCustomer(std::string customerName, float customerBalance) 
 {
     // Greets customer by name
-    std::cout << "Welcome to Gurinder's Gurocer, " 
-        << customerName 
-        << "!" 
+    std::cout << "Welcome to Gurinder's Gurocer, "
+        << customerName
+        << "!"
+        << std::endl
+        << "Your Balance: $"
+        << customerBalance
         << std::endl;
     // 2 second delay before executing displayGrocery
     std::this_thread::sleep_for(std::chrono::seconds(2));
 };
 
+
 // Displays Grocery available for the day
 void displayGrocery(int apples, int bananas, int oranges, 
     int hershey, int twix, int taffy, 
     int jolly_rancher, int chicken, 
-    int steak, int pork_chop) 
+    int steak, int pork_chop, float customerBalance) 
 {
     // clears console
     system("cls");
     // Lists available grocery
-    std::cout << "Here is the available grocery:"
+    std::cout
+        << "Your Balance: $"
+        << customerBalance
+        << std::endl
+        << "Here is the available grocery:"
         << std::endl
         << "\n FRUITS"
         << std::endl
@@ -197,7 +235,7 @@ void customerCart(int& applesTaken,
     int& bananasTaken, int& orangesTaken,
     int& hersheyTaken, int& twixTaken, int& taffyTaken,
     int& jolly_rancherTaken, int& chickenTaken, int& steakTaken,
-    int& pork_chopTaken)
+    int& pork_chopTaken, std::string confirmationSelection)
 {
     // Prompts user to enter the amount of food they want
     std::cout 
@@ -229,16 +267,18 @@ void customerCart(int& applesTaken,
     std::cin >> steakTaken;
     std::cout << "Pork Chops: ";
     std::cin >> pork_chopTaken;
+    displayCart(applesTaken,
+        bananasTaken, orangesTaken,
+        hersheyTaken, twixTaken, taffyTaken,
+        jolly_rancherTaken, chickenTaken, steakTaken,
+        pork_chopTaken, confirmationSelection);
 };
 
-// Processes inventory to adjust for customer shopping -- NEEDS WORK
-void processGrocery(int apples, int bananas, int oranges,
-    int hershey, int twix, int taffy, int jolly_rancher,
-    int chicken, int steak, int pork_chop, int applesTaken,
+void displayCart(int applesTaken,
     int bananasTaken, int orangesTaken,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
-    int pork_chopTaken)
+    int pork_chopTaken, std::string confirmationSelection)
 {
     // Clears console
     system("cls");
@@ -270,9 +310,29 @@ void processGrocery(int apples, int bananas, int oranges,
         << "Steak: " << steakTaken
         << std::endl
         << "Pork Chops: " << pork_chopTaken
-        << std::endl;
+        << std::endl
+        << "Is this correct? (Y/N): ";
+    std::cin >> confirmationSelection;
     // 3 second delay before executing checkoutCustomer
     std::this_thread::sleep_for(std::chrono::seconds(3));
+}
+
+// Processes inventory to adjust for customer shopping -- NEEDS WORK
+void processGrocery(int apples, int bananas, int oranges,
+    int hershey, int twix, int taffy, int jolly_rancher,
+    int chicken, int steak, int pork_chop, int applesTaken,
+    int bananasTaken, int orangesTaken,
+    int hersheyTaken, int twixTaken, int taffyTaken,
+    int jolly_rancherTaken, int chickenTaken, int steakTaken,
+    int pork_chopTaken)
+{
+    
+}
+
+// Allows customer to discard grocery from cart
+void discardGrocery() 
+{
+
 }
 
 // Deducts grocery cost from customer balance -- NEEDS WORK
