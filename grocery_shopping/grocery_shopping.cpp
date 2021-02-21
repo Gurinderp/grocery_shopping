@@ -36,16 +36,19 @@ void displayCart(int applesTaken,
     int pork_chopTaken, std::string confirmationSelection);
 
 // Processes inventory to adjust for customer shopping
-void processGrocery(int apples, int bananas, int oranges,
-    int hershey, int twix, int taffy, int jolly_rancher,
-    int chicken, int steak, int pork_chop, int applesTaken,
+void processGrocery(int& apples, int& bananas, int& oranges,
+    int& hershey, int& twix, int& taffy, int& jolly_rancher,
+    int& chicken, int& steak, int& pork_chop, int applesTaken,
     int bananasTaken, int orangesTaken,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken);
 
 // Allows customer to discard grocery from cart
-void discardGrocery();
+void discardGrocery(int apples, int bananas, int oranges,
+    int hershey, int twix, int taffy,
+    int jolly_rancher, int chicken,
+    int steak, int pork_chop);
 
 // Deducts grocery cost from customer balance
 void checkoutCustomer(int applesTaken,
@@ -318,21 +321,65 @@ void displayCart(int applesTaken,
 }
 
 // Processes inventory to adjust for customer shopping -- NEEDS WORK
-void processGrocery(int apples, int bananas, int oranges,
-    int hershey, int twix, int taffy, int jolly_rancher,
-    int chicken, int steak, int pork_chop, int applesTaken,
+void processGrocery(int& apples, int& bananas, int& oranges,
+    int& hershey, int& twix, int& taffy, int& jolly_rancher,
+    int& chicken, int& steak, int& pork_chop, int applesTaken,
     int bananasTaken, int orangesTaken,
     int hersheyTaken, int twixTaken, int taffyTaken,
     int jolly_rancherTaken, int chickenTaken, int steakTaken,
     int pork_chopTaken)
 {
-    
-}
+    apples = apples - applesTaken;
+    bananas = bananas - bananasTaken;
+    oranges = oranges - orangesTaken;
+    hershey = hershey - hersheyTaken;
+    twix = twix - twixTaken;
+    taffy = taffy - taffyTaken;
+    jolly_rancher = jolly_rancher - jolly_rancherTaken;
+    chicken = chicken - chickenTaken;
+    steak = steak - steakTaken;
+    pork_chop = pork_chop - pork_chopTaken;
+
+    discardGrocery(apples, bananas, oranges,
+        hershey, twix, taffy,
+        jolly_rancher, chicken,
+        steak, pork_chop);
+};
 
 // Allows customer to discard grocery from cart
-void discardGrocery() 
+void discardGrocery(int apples, int bananas, int oranges,
+    int hershey, int twix, int taffy,
+    int jolly_rancher, int chicken,
+    int steak, int pork_chop)
 {
-
+    std::cout << "Here is the available grocery:"
+        << std::endl
+        << "\n FRUITS"
+        << std::endl
+        << "Apples: " << apples
+        << std::endl
+        << "Bananas: " << bananas
+        << std::endl
+        << "Oranges: " << oranges
+        << std::endl
+        << "\n CANDY"
+        << std::endl
+        << "Hershey: " << hershey
+        << std::endl
+        << "Twix: " << twix
+        << std::endl
+        << "Taffy: " << taffy
+        << std::endl
+        << "Jolly Ranchers: " << jolly_rancher
+        << std::endl
+        << "\n MEAT"
+        << std::endl
+        << "Chicken: " << chicken
+        << std::endl
+        << "Steak: " << steak
+        << std::endl
+        << "Pork Chops: " << pork_chop
+        << std::endl;
 }
 
 // Deducts grocery cost from customer balance -- NEEDS WORK
